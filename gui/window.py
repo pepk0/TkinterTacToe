@@ -17,6 +17,8 @@ class GameFiled(tk.Frame):
     def __init__(self,) -> None:
         super().__init__()
 
+        self.turn = 0
+
         self.matrix_field = [[0] * 3 for _ in range(3)]
 
         self.position_one = tk.Button(
@@ -66,18 +68,27 @@ class GameFiled(tk.Frame):
         self.position_nine.grid(row=2, column=2, padx=2, pady=2)
 
         def place_spot(self, position: int, widget) -> None:
+            if self.turn == 9:
+                return
+            self.turn += 1
             row = ceil(position / 3) - 1
             col = (position + 2) % 3
-            self.matrix_field[row][col] = "x"
-            [print(*row) for row in self.matrix_field]
-            widget["text"] = "X"
+            icon = "X" if self.turn % 2 == 0 else "O"
+            self.matrix_field[row][col] = icon
+            widget["text"] = icon
+            widget["state"] = tk.DISABLED
+
+
+class TextFrame(tk.Frame):
+    def __init__(self) -> None:
+        super().__init__()
 
 
 class MainFrame(tk.Tk):
     def __init__(self, ) -> None:
         super().__init__()
         self.title("Tic Tac Toe")
-        self.geometry("350x350")
         self.resizable(False, False)
         self.option_frame = ButtonFrame().grid(row=0, column=0)
-        self.game_field = GameFiled().grid(row=1, column=0)
+        self.text_frame = TextFrame().grid(row=1, column=0)
+        self.game_field = GameFiled().grid(row=2, column=0)
