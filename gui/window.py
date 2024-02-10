@@ -3,22 +3,12 @@ from tkinter import ttk
 from math import ceil
 
 
-class ButtonFrame(tk.Frame):
-    def __init__(self) -> None:
+class MainFrame(tk.Tk):
+    def __init__(self, ) -> None:
         super().__init__()
-        self.new_button = ttk.Button(self, text="New Game", width=20)
-        self.quit_button = ttk.Button(self, text="Quit")
-
-        self.new_button.grid(row=0, column=0, padx=5)
-        self.quit_button.grid(row=0, column=1)
-
-
-class GameFiled(tk.Frame):
-    def __init__(self,) -> None:
-        super().__init__()
-
+        self.title("Tic Tac Toe")
+        self.resizable(False, False)
         self.turn = 0
-
         self.matrix_field = [[0] * 3 for _ in range(3)]
 
         self.position_one = tk.Button(
@@ -70,25 +60,12 @@ class GameFiled(tk.Frame):
         def place_spot(self, position: int, widget) -> None:
             if self.turn == 9:
                 return
-            self.turn += 1
+
+            if widget["text"]:
+                self.turn += 1
+
             row = ceil(position / 3) - 1
             col = (position + 2) % 3
             icon = "X" if self.turn % 2 == 0 else "O"
             self.matrix_field[row][col] = icon
             widget["text"] = icon
-            widget["state"] = tk.DISABLED
-
-
-class TextFrame(tk.Frame):
-    def __init__(self) -> None:
-        super().__init__()
-
-
-class MainFrame(tk.Tk):
-    def __init__(self, ) -> None:
-        super().__init__()
-        self.title("Tic Tac Toe")
-        self.resizable(False, False)
-        self.option_frame = ButtonFrame().grid(row=0, column=0)
-        self.text_frame = TextFrame().grid(row=1, column=0)
-        self.game_field = GameFiled().grid(row=2, column=0)
