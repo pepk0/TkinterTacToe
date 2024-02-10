@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from math import ceil
 
+
 class ButtonFrame(tk.Frame):
     def __init__(self) -> None:
         super().__init__()
