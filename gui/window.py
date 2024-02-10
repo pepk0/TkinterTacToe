@@ -67,4 +67,4 @@ class MainFrame(tk.Tk):
         self.position_nine.grid(row=2, column=2, padx=2, pady=2)
 
         def place_spot(self, position: int, widget) -> None:
-            widget["text"] = "P"
+            pass
