@@ -13,38 +13,47 @@ class MainFrame(tk.Tk):
 
         self.position_one = tk.Button(
             self, text="", width=12, height=5, bg="Grey", relief="flat",
+            activebackground="Gray", border=0,
             command=lambda: place_spot(self, 1, self.position_one))
 
         self.position_two = tk.Button(
             self, text="", width=12, height=5, bg="Grey", relief="flat",
+            activebackground="Gray", border=0,
             command=lambda: place_spot(self, 2, self.position_two))
 
         self.position_three = tk.Button(
             self, text="", width=12, height=5, bg="Gray", relief="flat",
+            activebackground="Gray", border=0,
             command=lambda: place_spot(self, 3, self.position_three))
 
         self.position_four = tk.Button(
             self, text="", width=12, height=5, bg="Grey", relief="flat",
+            activebackground="Gray", border=0,
             command=lambda: place_spot(self, 4, self.position_four))
 
         self.position_five = tk.Button(
             self, text="", width=12, height=5, bg="Grey", relief="flat",
+            activebackground="Gray", border=0,
             command=lambda: place_spot(self, 5, self.position_five))
 
         self.position_six = tk.Button(
             self, text="", width=12, height=5, bg="Grey", relief="flat",
+            activebackground="Gray", border=0,
             command=lambda: place_spot(self, 6, self.position_six))
 
         self.position_seven = tk.Button(
             self, text="", width=12, height=5, bg="Grey", relief="flat",
+            activebackground="Gray", border=0,
             command=lambda: place_spot(self, 7, self.position_seven))
 
         self.position_eight = tk.Button(
             self, text="", width=12, height=5, bg="Grey", relief="flat",
+            activebackground="Gray", border=0,
             command=lambda: place_spot(self, 8, self.position_eight))
 
         self.position_nine = tk.Button(
             self, text="", width=12, height=5, bg="Grey", relief="flat",
+            activebackground="Gray", border=0,
             command=lambda: place_spot(self, 9, self.position_nine))
 
         self.position_one.grid(row=0, column=0, padx=2, pady=2)
@@ -58,4 +67,4 @@ class MainFrame(tk.Tk):
         self.position_nine.grid(row=2, column=2, padx=2, pady=2)
 
         def place_spot(self, position: int, widget) -> None:
-            pass
+            widget["text"] = "P"
