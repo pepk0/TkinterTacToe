@@ -58,14 +58,4 @@ class MainFrame(tk.Tk):
         self.position_nine.grid(row=2, column=2, padx=2, pady=2)
 
         def place_spot(self, position: int, widget) -> None:
-            if self.turn == 9:
-                return
-
-            if widget["text"]:
-                self.turn += 1
-
-            row = ceil(position / 3) - 1
-            col = (position + 2) % 3
-            icon = "X" if self.turn % 2 == 0 else "O"
-            self.matrix_field[row][col] = icon
-            widget["text"] = icon
+            pass
