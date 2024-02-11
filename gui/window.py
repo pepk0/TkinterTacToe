@@ -1,7 +1,6 @@
 import tkinter as tk
 
 from PIL import Image, ImageTk
-from tkinter import ttk
 from math import ceil
 from tkinter import messagebox
 
@@ -15,9 +14,8 @@ class FrameButton(tk.Frame):
         self.image_X = ImageTk.PhotoImage(
             Image.open(r"imgs\x.png").resize((80, 80)))
 
-        self.button = tk.Button(self, image=self.image_one,
-                                height=110, width=110,
-                                background="Gray", border=0,
+        self.button = tk.Button(self, image=self.image_one, height=110,
+                                width=110, background="Gray", border=0,
                                 activebackground="Gray")
 
         def on_press(self) -> None:
@@ -31,9 +29,24 @@ class FrameButton(tk.Frame):
 
 
 class InfoFrame(tk.Frame):
-    def __init__(self,) -> None:
+    def __init__(self, parent) -> None:
         super().__init__()
-        pass
+        self.image_O = ImageTk.PhotoImage(
+            Image.open(r"imgs\o.png").resize((40, 40)))
+        self.image_X = ImageTk.PhotoImage(
+            Image.open(r"imgs\x.png").resize((40, 40)))
+
+        self.label = tk.Label(text="is placing", font=("Helvetica", 25))
+        self.img_label = tk.Label(image=self.image_O, height=90)
+
+        self.img_label.grid(row=0, column=0, columnspan=1)
+        self.label.grid(row=0, column=1, columnspan=2, sticky="w")
+
+        def set_img(self, parent):
+            img = self.image_O if parent.turn % 2 == 0 else self.image_X
+            self.img_label["image"] = img
+
+        self.set_img = set_img
 
 
 class MainFrame(tk.Tk):
@@ -43,6 +56,8 @@ class MainFrame(tk.Tk):
         self.resizable(False, False)
         self.turn = 0
         self.matrix_field = [[0] * 3 for _ in range(3)]
+
+        self.info_label = InfoFrame(self)
 
         self.button_one = FrameButton(self)
         self.button_two = FrameButton(self)
@@ -54,15 +69,16 @@ class MainFrame(tk.Tk):
         self.button_eight = FrameButton(self)
         self.button_nine = FrameButton(self)
 
-        self.button_one.grid(row=0, column=0, padx=2, pady=2)
-        self.button_two.grid(row=0, column=1, padx=2, pady=2)
-        self.button_tree.grid(row=0, column=2, padx=2, pady=2)
-        self.button_four.grid(row=1, column=0, padx=2, pady=2)
-        self.button_five.grid(row=1, column=1, padx=2, pady=2)
-        self.button_six.grid(row=1, column=2, padx=2, pady=2)
-        self.button_seven.grid(row=2, column=0, padx=2, pady=2)
-        self.button_eight.grid(row=2, column=1, padx=2, pady=2)
-        self.button_nine.grid(row=2, column=2, padx=2, pady=2)
+        self.info_label.grid(row=0, column=0,)
+        self.button_one.grid(row=1, column=0, padx=2, pady=2)
+        self.button_two.grid(row=1, column=1, padx=2, pady=2)
+        self.button_tree.grid(row=1, column=2, padx=2, pady=2)
+        self.button_four.grid(row=2, column=0, padx=2, pady=2)
+        self.button_five.grid(row=2, column=1, padx=2, pady=2)
+        self.button_six.grid(row=2, column=2, padx=2, pady=2)
+        self.button_seven.grid(row=3, column=0, padx=2, pady=2)
+        self.button_eight.grid(row=3, column=1, padx=2, pady=2)
+        self.button_nine.grid(row=3, column=2, padx=2, pady=2)
 
         def check_for_winner(event, arg: int, button) -> None:
             row, col = ceil(arg / 3) - 1, (arg + 2) % 3
@@ -73,6 +89,7 @@ class MainFrame(tk.Tk):
 
             self.matrix_field[row][col] = element  # type: ignore
             button.on_press(button)
+            self.info_label.set_img(self.info_label, self)
 
             element = self.matrix_field[row][col]
             directions = [(0, 1), (1, 0), (1, 1), (-1, 1)]
@@ -95,9 +112,14 @@ class MainFrame(tk.Tk):
                         if self.matrix_field[cur_row][cur_col] == element:
                             connected += 1
 
-                    if connected >= 3:
+                    if connected == 3:
                         messagebox.showinfo(
-                            "Game Finished", f"Won => {element}")
+                            "Game Finished", f"The winner is: '{element}' !")
+                        raise SystemExit
+
+                    elif self.turn == 9:
+                        messagebox.showinfo(
+                            "Game Finished", f"The game is Draw!")
                         raise SystemExit
 
                 cur_row, cur_col = row, col
