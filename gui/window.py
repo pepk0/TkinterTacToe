@@ -7,7 +7,7 @@ from tkinter import messagebox
 
 
 class FrameButton(tk.Frame):
-    def __init__(self, matrix: list, position: int, main) -> None:
+    def __init__(self, parent) -> None:
         super().__init__()
         self.image_one = ImageTk.PhotoImage(Image.open(r"imgs\1x1.png"))
         self.image_O = ImageTk.PhotoImage(
@@ -18,22 +18,16 @@ class FrameButton(tk.Frame):
         self.button = tk.Button(self, image=self.image_one,
                                 height=110, width=110,
                                 background="Gray", border=0,
-                                activebackground="Gray",
-                                command=lambda: on_press(self))
-
-        self.button.grid(row=0, column=0)
+                                activebackground="Gray")
 
         def on_press(self) -> None:
-            row, col = ceil(position / 3) - 1, (position + 2) % 3
+            img = self.image_O if parent.turn % 2 == 0 else self.image_X
+            self.button.image = img
+            self.button["image"] = img
+            parent.turn += 1
 
-            if matrix[row][col] == 0:
-                element = "O" if main.turn % 2 == 0 else "X"
-                img = self.image_O if main.turn % 2 == 0 else self.image_X
-
-                matrix[row][col] = element
-                self.button.image = img
-                self.button["image"] = img
-                main.turn += 1
+        self.on_press = on_press
+        self.button.grid(row=0, column=0)
 
 
 class InfoFrame(tk.Frame):
@@ -50,15 +44,15 @@ class MainFrame(tk.Tk):
         self.turn = 0
         self.matrix_field = [[0] * 3 for _ in range(3)]
 
-        self.button_one = FrameButton(self.matrix_field, 1, self)
-        self.button_two = FrameButton(self.matrix_field, 2, self)
-        self.button_tree = FrameButton(self.matrix_field, 3, self)
-        self.button_four = FrameButton(self.matrix_field, 4, self)
-        self.button_five = FrameButton(self.matrix_field, 5, self)
-        self.button_six = FrameButton(self.matrix_field, 6, self)
-        self.button_seven = FrameButton(self.matrix_field, 7, self)
-        self.button_eight = FrameButton(self.matrix_field, 8, self)
-        self.button_nine = FrameButton(self.matrix_field, 9, self)
+        self.button_one = FrameButton(self)
+        self.button_two = FrameButton(self)
+        self.button_tree = FrameButton(self)
+        self.button_four = FrameButton(self)
+        self.button_five = FrameButton(self)
+        self.button_six = FrameButton(self)
+        self.button_seven = FrameButton(self)
+        self.button_eight = FrameButton(self)
+        self.button_nine = FrameButton(self)
 
         self.button_one.grid(row=0, column=0, padx=2, pady=2)
         self.button_two.grid(row=0, column=1, padx=2, pady=2)
@@ -70,15 +64,17 @@ class MainFrame(tk.Tk):
         self.button_eight.grid(row=2, column=1, padx=2, pady=2)
         self.button_nine.grid(row=2, column=2, padx=2, pady=2)
 
-        def check_for_winner(event, arg: int) -> None:
+        def check_for_winner(event, arg: int, button) -> None:
             row, col = ceil(arg / 3) - 1, (arg + 2) % 3
-            
+            element = "O" if self.turn % 2 == 0 else "X"
+
             if self.matrix_field[row][col] != 0:
                 return
-            
-            element = "O" if self.turn % 2 == 0 else "X"
-            self.matrix_field[row][col] = element  # type: ignore
 
+            self.matrix_field[row][col] = element  # type: ignore
+            button.on_press(button)
+
+            element = self.matrix_field[row][col]
             directions = [(0, 1), (1, 0), (1, 1), (-1, 1)]
             cur_row, cur_col = row, col
 
@@ -100,31 +96,45 @@ class MainFrame(tk.Tk):
                             connected += 1
 
                     if connected >= 3:
-                        self.matrix_field[row][col] = 0
                         messagebox.showinfo(
                             "Game Finished", f"Won => {element}")
                         raise SystemExit
 
                 cur_row, cur_col = row, col
 
-            self.matrix_field[row][col] = 0
+        self.button_one.button.bind("<Button-1>", lambda event, arg=1,
+                                    button=self.button_one:
+                                    check_for_winner(event, arg, button))
 
-        self.button_one.button.bind(
-            "<Button-1>", lambda event, arg=1: check_for_winner(event, arg))
-        self.button_two.button.bind(
-            "<Button-1>", lambda event, arg=2: check_for_winner(event, arg))
-        self.button_tree.button.bind(
-            "<Button-1>", lambda event, arg=3: check_for_winner(event, arg))
-        self.button_four.button.bind(
-            "<Button-1>", lambda event, arg=4: check_for_winner(event, arg))
-        self.button_five.button.bind(
-            "<Button-1>", lambda event, arg=5: check_for_winner(event, arg))
-        self.button_six.button.bind(
-            "<Button-1>", lambda event, arg=6: check_for_winner(event, arg))
-        self.button_seven.button.bind(
-            "<Button-1>", lambda event, arg=7: check_for_winner(event, arg))
-        self.button_eight.button.bind(
-            "<Button-1>", lambda event, arg=8: check_for_winner(event, arg))
-        self.button_nine.button.bind(
-            "<Button-1>", lambda event, arg=9: check_for_winner(event, arg))
+        self.button_two.button.bind("<Button-1>", lambda event, arg=2,
+                                    button=self.button_two:
+                                    check_for_winner(event, arg, button))
 
+        self.button_tree.button.bind("<Button-1>", lambda event, arg=3,
+                                     button=self.button_tree:
+                                     check_for_winner(event, arg, button))
+
+        self.button_four.button.bind("<Button-1>", lambda event, arg=4,
+                                     button=self.button_four:
+                                     check_for_winner(event, arg, button))
+
+        self.button_five.button.bind("<Button-1>", lambda event, arg=5,
+                                     button=self.button_five:
+                                     check_for_winner(event, arg, button))
+
+        self.button_six.button.bind("<Button-1>",
+                                    lambda event, arg=6,
+                                    button=self.button_six:
+                                    check_for_winner(event, arg, button))
+
+        self.button_seven.button.bind("<Button-1>", lambda event, arg=7,
+                                      button=self.button_seven:
+                                      check_for_winner(event, arg, button))
+
+        self.button_eight.button.bind("<Button-1>", lambda event, arg=8,
+                                      button=self.button_eight:
+                                      check_for_winner(event, arg, button))
+
+        self.button_nine.button.bind("<Button-1>", lambda event, arg=9,
+                                     button=self.button_nine:
+                                     check_for_winner(event, arg, button))
