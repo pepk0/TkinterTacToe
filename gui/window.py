@@ -44,22 +44,48 @@ class MainFrame(tk.Tk):
         self.turn = 0
         self.matrix_field = [[0] * 3 for _ in range(3)]
 
-        self.button_one = FrameButton(self.matrix_field, 1, self).grid(
-            row=0, column=0, padx=2, pady=2)
-        self.button_two = FrameButton(self.matrix_field, 2, self).grid(
-            row=0, column=1, padx=2, pady=2)
-        self.button_tree = FrameButton(self.matrix_field, 3, self).grid(
-            row=0, column=2, padx=2, pady=2)
-        self.button_four = FrameButton(self.matrix_field, 4, self).grid(
-            row=1, column=0, padx=2, pady=2)
-        self.button_five = FrameButton(self.matrix_field, 5, self).grid(
-            row=1, column=1, padx=2, pady=2)
-        self.button_six = FrameButton(self.matrix_field, 6, self).grid(
-            row=1, column=2, padx=2, pady=2)
-        self.button_seven = FrameButton(self.matrix_field, 7, self).grid(
-            row=2, column=0, padx=2, pady=2)
-        self.button_eight = FrameButton(self.matrix_field, 8, self).grid(
-            row=2, column=1, padx=2, pady=2)
-        self.button_nine = FrameButton(self.matrix_field, 9, self).grid(
-            row=2, column=2, padx=2, pady=2)
+        self.button_one = FrameButton(self.matrix_field, 1, self)
+        self.button_two = FrameButton(self.matrix_field, 2, self)
+        self.button_tree = FrameButton(self.matrix_field, 3, self)
+        self.button_four = FrameButton(self.matrix_field, 4, self)
+        self.button_five = FrameButton(self.matrix_field, 5, self)
+        self.button_six = FrameButton(self.matrix_field, 6, self)
+        self.button_seven = FrameButton(self.matrix_field, 7, self)
+        self.button_eight = FrameButton(self.matrix_field, 8, self)
+        self.button_nine = FrameButton(self.matrix_field, 9, self)
 
+        self.button_one.grid(row=0, column=0, padx=2, pady=2)
+        self.button_two.grid(row=0, column=1, padx=2, pady=2)
+        self.button_tree.grid(row=0, column=2, padx=2, pady=2)
+        self.button_four.grid(row=1, column=0, padx=2, pady=2)
+        self.button_five.grid(row=1, column=1, padx=2, pady=2)
+        self.button_six.grid(row=1, column=2, padx=2, pady=2)
+        self.button_seven.grid(row=2, column=0, padx=2, pady=2)
+        self.button_eight.grid(row=2, column=1, padx=2, pady=2)
+        self.button_nine.grid(row=2, column=2, padx=2, pady=2)
+
+        def check_for_winner(event, arg: int) -> None:
+            row = ceil(arg / 3) - 1
+            col = (arg + 2) % 3
+            if self.matrix_field[row][col] == 0:
+                pass
+
+
+        self.button_one.button.bind(
+            "<Button-1>", lambda event, arg=1: check_for_winner(event, arg))
+        self.button_two.button.bind(
+            "<Button-1>", lambda event, arg=2: check_for_winner(event, arg))
+        self.button_tree.button.bind(
+            "<Button-1>", lambda event, arg=3: check_for_winner(event, arg))
+        self.button_four.button.bind(
+            "<Button-1>", lambda event, arg=4: check_for_winner(event, arg))
+        self.button_five.button.bind(
+            "<Button-1>", lambda event, arg=5: check_for_winner(event, arg))
+        self.button_six.button.bind(
+            "<Button-1>", lambda event, arg=6: check_for_winner(event, arg))
+        self.button_seven.button.bind(
+            "<Button-1>", lambda event, arg=7: check_for_winner(event, arg))
+        self.button_eight.button.bind(
+            "<Button-1>", lambda event, arg=8: check_for_winner(event, arg))
+        self.button_nine.button.bind(
+            "<Button-1>", lambda event, arg=9: check_for_winner(event, arg))
