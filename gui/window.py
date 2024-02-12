@@ -77,6 +77,7 @@ class MainFrame(tk.Tk):
         # mapping so we can use it to convert 2d matrix coordinates,
         # to potions in range 1 - 9
         self.button_mapping = {}
+        self.geometry('+%d+%d'%(700, 200)) # placement adjust for your screen
 
         self.info_field = InfoFrame()
         self.control_field = ControlFrame(self)
