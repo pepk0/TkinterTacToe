@@ -48,7 +48,7 @@ class InfoFrame(tk.Frame):
 
 
 class MainFrame(tk.Tk):
-    def __init__(self,) -> None:
+    def __init__(self) -> None:
         super().__init__()
         self.title("Tic Tac Toe")
         self.resizable(False, False)
