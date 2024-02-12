@@ -43,7 +43,6 @@ class InfoFrame(tk.Frame):
 
     def set_img(self, parent):
         img = self.image_O if parent.turn % 2 == 0 else self.image_X
-        self.img_label.image = img  # type: ignore
         self.img_label["image"] = img
 
 
