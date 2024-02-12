@@ -77,7 +77,7 @@ class MainFrame(tk.Tk):
             element = "O" if self.turn % 2 == 0 else "X"
 
             if place_on_matrix(self.matrix_field, element, position):
-                # place a appropriate image on the button and info panel
+                # place an appropriate image on the button and info panel
                 frame.on_place(self)
                 self.info_field.set_img(self)
 
@@ -90,7 +90,7 @@ class MainFrame(tk.Tk):
                     raise SystemExit
 
             # a maximum of 3x3 = 9 moves can be made,
-            # if no winner then its a draw
+            # if no winner then it's a draw
             if self.turn == 9:
                 messagebox.showinfo(
                     "Game Finished", f"The game is Draw!")
