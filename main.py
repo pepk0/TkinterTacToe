@@ -2,8 +2,10 @@ from gui.window import MainFrame
 
 
 def main() -> None:
-    root = MainFrame()
-    root.mainloop()
+
+    while True:
+        root = MainFrame()
+        root.mainloop()
 
 
 if __name__ == "__main__":

@@ -36,15 +36,27 @@ class InfoFrame(tk.Frame):
         self.image_X = ImageTk.PhotoImage(
             Image.open(r"imgs\x.png").resize((40, 40)))
 
-        self.label = tk.Label(text="is placing", font=("Helvetica", 25))
-        self.img_label = tk.Label(image=self.image_O, height=90)
+        self.label = tk.Label(self, text=" is placing", font=("Helvetica", 25))
+        self.img_label = tk.Label(self, image=self.image_O, height=90)
 
-        self.img_label.grid(row=0, column=0, columnspan=1)
-        self.label.grid(row=0, column=1, columnspan=2, sticky="w")
+        self.img_label.grid(row=0, column=0)
+        self.label.grid(row=0, column=1)
 
     def set_img(self, parent):
         img = self.image_O if parent.turn % 2 == 0 else self.image_X
         self.img_label["image"] = img
+
+
+class ControlFrame(tk.Frame):
+    def __init__(self, parent) -> None:
+        super().__init__()
+        self.parent = parent
+
+        self.quit_button = tk.Button(self, text="Quit Game", bg="#d15e6a")
+        self.restart_button = tk.Button(self, text="Reset Game")
+
+        self.restart_button.grid(row=0, column=0, padx=20)
+        self.quit_button.grid(row=0, column=1)
 
 
 class MainFrame(tk.Tk):
@@ -59,18 +71,25 @@ class MainFrame(tk.Tk):
         self.button_mapping = {}
 
         self.info_field = InfoFrame()
+        self.control_field = ControlFrame(self)
 
         # frame placement
+        self.control_field.grid(row=0, column=0, columnspan=3, pady=24)
+        self.info_field.grid(row=1, column=0, columnspan=3)
+
+        self.control_field.quit_button.bind(
+            "<Button-1>", lambda event: quit_game(event))
+        self.control_field.restart_button.bind(
+            "<Button-1>", lambda event, parent=self: reset_game(event, parent))
+
         for i in range(1, 10):
             row, col = get_coordinates(i)
             grid_pos = GridPosition(i)
             self.button_mapping[(row, col)] = grid_pos
-            grid_pos.grid(row=row + 1, column=col, padx=2, pady=2,)
+            grid_pos.grid(row=row + 2, column=col, padx=2, pady=2,)
             # on click event binding instead of a button command
             grid_pos.button.bind("<Button-1>", lambda event,
                                  frame=grid_pos: on_button_click(event, frame))
-
-        self.info_field.grid(row=0, column=0)
 
         def on_button_click(event, frame) -> None:
             position = frame.number
@@ -87,11 +106,15 @@ class MainFrame(tk.Tk):
                     mark_winner(winning_pos, self.button_mapping)
                     messagebox.showinfo(
                         "Game Finished", f"The winner is: '{element}' !")
-                    raise SystemExit
-
+                    reset_game(event, self)
             # a maximum of 3x3 = 9 moves can be made,
             # if no winner then it's a draw
-            if self.turn == 9:
-                messagebox.showinfo(
-                    "Game Finished", f"The game is Draw!")
-                raise SystemExit
+                elif self.turn == 9:
+                    messagebox.showinfo(
+                        "Game Finished", f"The game is Draw!")
+
+        def quit_game(event) -> None:
+            raise SystemExit
+
+        def reset_game(event, parent) -> None:
+            parent.destroy()
