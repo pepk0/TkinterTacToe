@@ -2,7 +2,8 @@ import tkinter as tk
 
 from PIL import Image, ImageTk
 from tkinter import messagebox
-from utils.functionality import get_coordinates, place_on_matrix, get_winner
+from utils.functionality import (
+    get_coordinates, place_on_matrix, get_winner, mark_winner)
 
 
 class GridPosition(tk.Frame):
@@ -77,8 +78,7 @@ class MainFrame(tk.Tk):
                 winning_pos = get_winner(self.matrix_field, position, element)
 
                 if winning_pos:
-                    for winner in winning_pos:
-                        self.button_mapping[winner].button["bg"] = "Green"
+                    mark_winner(winning_pos, self.button_mapping)
                     messagebox.showinfo(
                         "Game Finished", f"The winner is: '{element}' !")
                     raise SystemExit

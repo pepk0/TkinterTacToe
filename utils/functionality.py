@@ -13,7 +13,7 @@ def get_winner(matrix: list, position: int, element: str) -> list | None:
     while directions:
 
         next_row, next_col = directions.pop()
-        winner = [(cur_row, cur_col)] 
+        winner = [(cur_row, cur_col)]
         for i in range((3 * 2) - 2):
 
             if i == 3 - 1:
@@ -42,3 +42,8 @@ def place_on_matrix(matrix: list, element: str, position: int) -> bool:
         return True
 
     return False
+
+
+def mark_winner(winning_sequence: list, mapping: dict) -> None:
+    for winner in winning_sequence:
+        mapping[winner].button["bg"] = "Green"
