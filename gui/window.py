@@ -106,9 +106,9 @@ class MainFrame(tk.Tk):
                     mark_winner(winning_pos, self.button_mapping)
                     messagebox.showinfo(
                         "Game Finished", f"The winner is: '{element}' !")
-                    reset_game(event, self)
-            # a maximum of 3x3 = 9 moves can be made,
-            # if no winner then it's a draw
+                    self.matrix_field = [["X"] * 3 for _ in range(3)]
+                # a maximum of 3x3 = 9 moves can be made,
+                # if no winner then it's a draw
                 elif self.turn == 9:
                     messagebox.showinfo(
                         "Game Finished", f"The game is Draw!")
