@@ -56,3 +56,5 @@ def mark_winner(winning_sequence: list, mapping: dict) -> None:
     its background color to green to mark winning positions"""
     for winner in winning_sequence:
         mapping[winner].button["bg"] = "Green"
+        mapping[winner].button["activebackground"] = "Green"
+
