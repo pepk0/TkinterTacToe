@@ -93,11 +93,6 @@ class MainFrame(tk.Tk):
         self.control_field.grid(row=0, column=0, columnspan=3, pady=20)
         self.info_field.grid(row=1, column=0, columnspan=3)
 
-        # self.control_field.quit_button.bind(
-        #     "<Button-1>", lambda event: quit_game(event))
-        # self.control_field.restart_button.bind(
-        #     "<Button-1>", lambda event: reset_game(event))
-
         for number in range(1, 10):
             row, col = get_coordinates(number)
             grid_pos = GridPosition(number)
