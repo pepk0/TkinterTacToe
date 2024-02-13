@@ -58,8 +58,16 @@ class ControlFrame(tk.Frame):
         super().__init__()
         self.parent = parent
 
-        self.quit_button = tk.Button(self, text="Quit Game", bg="#d15e6a")
-        self.restart_button = tk.Button(self, text="Reset Game")
+        def quit_game() -> None:
+            raise SystemExit
+
+        def reset_game(parent) -> None:
+            parent.destroy()
+
+        self.quit_button = tk.Button(
+            self, text="Quit Game", bg="#d15e6a", command=quit_game)
+        self.restart_button = tk.Button(
+            self, text="Reset Game", command=lambda: reset_game(parent))
 
         self.restart_button.grid(row=0, column=0, padx=20)
         self.quit_button.grid(row=0, column=1)
@@ -85,14 +93,14 @@ class MainFrame(tk.Tk):
         self.control_field.grid(row=0, column=0, columnspan=3, pady=20)
         self.info_field.grid(row=1, column=0, columnspan=3)
 
-        self.control_field.quit_button.bind(
-            "<Button-1>", lambda event: quit_game(event))
-        self.control_field.restart_button.bind(
-            "<Button-1>", lambda event, parent=self: reset_game(event, parent))
+        # self.control_field.quit_button.bind(
+        #     "<Button-1>", lambda event: quit_game(event))
+        # self.control_field.restart_button.bind(
+        #     "<Button-1>", lambda event: reset_game(event))
 
-        for i in range(1, 10):
-            row, col = get_coordinates(i)
-            grid_pos = GridPosition(i)
+        for number in range(1, 10):
+            row, col = get_coordinates(number)
+            grid_pos = GridPosition(number)
             self.button_mapping[(row, col)] = grid_pos
             grid_pos.grid(row=row + 2, column=col, padx=2, pady=2,)
             # on click event binding instead of a button command
@@ -120,9 +128,3 @@ class MainFrame(tk.Tk):
                 elif self.turn == 9:
                     display_text(self, self.info_field,
                                  "Game Over! DRAW!", draw=True)
-
-        def quit_game(event) -> None:
-            raise SystemExit
-
-        def reset_game(event, parent) -> None:
-            parent.destroy()
