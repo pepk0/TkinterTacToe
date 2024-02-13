@@ -116,7 +116,6 @@ class MainFrame(tk.Tk):
                 if winning_pos:
                     mark_winner(winning_pos, self.button_mapping)
                     display_text(self, self.info_field, "The winner is: ")
-
                     self.matrix_field = [["X"] * 3 for _ in range(3)]
                 # a maximum of 9 moves can be made,
                 # if no one has won by then it's a draw
