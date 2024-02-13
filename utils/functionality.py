@@ -2,14 +2,14 @@ from math import ceil
 
 
 def get_coordinates(position: int) -> tuple:
-    """Given a integer in the range 1 to 9 
-    it gets mapped in to a 3x3 matrix coordinates"""
+    """Given a position(int) returns the matrix 
+    coordinates(row, col) for this grid position"""
     return ceil(position / 3) - 1, (position + 2) % 3
 
 
 def get_winner(matrix: list, position: int, element: str) -> list | None:
     """ Given a matrix of size 3x3, position (int) and element (str)
-    check if the curet placed element forms a wining chain in length 3"""
+    check if the current placed element, forms a wining chain in length of 3"""
     row, col = get_coordinates(position)
     directions = [(0, 1), (1, 0), (1, 1), (-1, 1)]
     cur_row, cur_col = row, col
@@ -52,15 +52,15 @@ def place_on_matrix(matrix: list, element: str, position: int) -> bool:
 
 def mark_winner(winning_sequence: list, mapping: dict) -> None:
     """Given the winning sequence list[(int, int)..] and a 
-    mapping dict{(int, int): Tk.Frame} takes each frame object and replaces
-    its background color to green to mark winning positions"""
+    mapping dict{(int, int): tk.Frame} takes each frame object and sets it's
+    background color to green to mark winning positions"""
     for winner in winning_sequence:
         mapping[winner].button["bg"] = "Green"
         mapping[winner].button["activebackground"] = "Green"
 
 
 def display_text(parent, widget, text: str, draw=False) -> None:
-    """Given a text(string) and a boolean takes the widget(tk.Frame) 
+    """Given a text(string) a boolean and a widget(tk.Frame) takes the widget
     and places the text on it and sets the appropriate image"""
     widget.text_label["text"] = text
     widget.set_img(parent, draw)

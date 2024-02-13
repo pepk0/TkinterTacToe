@@ -97,7 +97,7 @@ class MainFrame(tk.Tk):
             row, col = get_coordinates(number)
             grid_pos = GridPosition(number)
             self.button_mapping[(row, col)] = grid_pos
-            grid_pos.grid(row=row + 2, column=col, padx=2, pady=2,)
+            grid_pos.grid(row=row + 2, column=col, padx=2, pady=2)
             # on click event binding instead of a button command
             grid_pos.button.bind("<Button-1>", lambda event,
                                  frame=grid_pos: on_button_click(event, frame))
