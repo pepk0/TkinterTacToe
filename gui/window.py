@@ -2,7 +2,7 @@ import tkinter as tk
 
 from PIL import Image, ImageTk
 from utils.functionality import (
-    get_coordinates, place_on_matrix, get_winner, mark_winner)
+    get_coordinates, place_on_matrix, get_winner, mark_winner, display_text)
 
 
 class GridPosition(tk.Frame):
@@ -44,13 +44,11 @@ class InfoFrame(tk.Frame):
         self.img_label.grid(row=0, column=1)
         self.text_label.grid(row=0, column=0)
 
-    def set_img(self, parent, element=None, draw=False):
+    def set_img(self, parent, draw=False):
         img = self.image_O if parent.turn % 2 == 0 else self.image_X
 
         if draw:
             img = self.image_draw
-        elif element:
-            img = self.image_O if element == "O" else self.image_X
 
         self.img_label["image"] = img
 
@@ -74,10 +72,10 @@ class MainFrame(tk.Tk):
         self.resizable(False, False)
         self.turn = 0
         self.matrix_field = [[0] * 3 for _ in range(3)]
-        # mapping so we can use it to convert 2d matrix coordinates,
-        # to potions in range 1 - 9
+        # dict to store matrix coordinates (row, col) to its
+        # corresponding grid element
         self.button_mapping = {}
-        # placement adjust for your screen
+        # starting position of the game frame, adjust for your screen
         self.geometry('+%d+%d' % (700, 200))
 
         self.info_field = InfoFrame()
@@ -114,14 +112,14 @@ class MainFrame(tk.Tk):
 
                 if winning_pos:
                     mark_winner(winning_pos, self.button_mapping)
-                    self.info_field.set_img(self, element=element)
-                    self.info_field.text_label["text"] = "Winner is: "
+                    display_text(self, self.info_field, "The winner is: ")
+
                     self.matrix_field = [["X"] * 3 for _ in range(3)]
-                # a maximum of 3x3 = 9 moves can be made,
-                # if no winner then it's a draw
+                # a maximum of 9 moves can be made,
+                # if no one has won by then it's a draw
                 elif self.turn == 9:
-                    self.info_field.text_label["text"] = "The Game is Draw"
-                    self.info_field.set_img(self, draw=True)
+                    display_text(self, self.info_field,
+                                 "Game Over! DRAW!", draw=True)
 
         def quit_game(event) -> None:
             raise SystemExit

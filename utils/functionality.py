@@ -58,3 +58,9 @@ def mark_winner(winning_sequence: list, mapping: dict) -> None:
         mapping[winner].button["bg"] = "Green"
         mapping[winner].button["activebackground"] = "Green"
 
+
+def display_text(parent, widget, text: str, draw=False) -> None:
+    """Given a text(string) and a boolean takes the widget(tk.Frame) 
+    and places the text on it and sets the appropriate image"""
+    widget.text_label["text"] = text
+    widget.set_img(parent, draw)
