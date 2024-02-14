@@ -1,5 +1,6 @@
 import tkinter as tk
 
+import os
 from PIL import Image, ImageTk
 from utils.functionality import (
     get_coordinates, place_on_matrix, get_winner, mark_winner, display_text)
@@ -8,11 +9,12 @@ from utils.functionality import (
 class GridPosition(tk.Frame):
     def __init__(self, number: int) -> None:
         super().__init__()
-        self.image_one = ImageTk.PhotoImage(Image.open(r"imgs\1x1.png"))
+        self.image_one = ImageTk.PhotoImage(
+            Image.open(os.path.join("imgs", "1x1.png")))
         self.image_O = ImageTk.PhotoImage(
-            Image.open(r"imgs\o.png").resize((80, 80)))
+            Image.open(os.path.join("imgs", "o.png")).resize((80, 80)))
         self.image_X = ImageTk.PhotoImage(
-            Image.open(r"imgs\x.png").resize((80, 80)))
+            Image.open(os.path.join("imgs", "x.png")).resize((80, 80)))
         self.number = number
 
         self.button = tk.Button(self, image=self.image_one, height=110,
@@ -31,11 +33,11 @@ class InfoFrame(tk.Frame):
     def __init__(self) -> None:
         super().__init__()
         self.image_draw = self.image_O = ImageTk.PhotoImage(
-            Image.open(r"imgs\1x1.png").resize((1, 1)))
+            Image.open(os.path.join("imgs", "1x1.png")).resize((1, 1)))
         self.image_O = ImageTk.PhotoImage(
-            Image.open(r"imgs\o.png").resize((40, 40)))
+            Image.open(os.path.join("imgs", "o.png")).resize((40, 40)))
         self.image_X = ImageTk.PhotoImage(
-            Image.open(r"imgs\x.png").resize((40, 40)))
+            Image.open(os.path.join("imgs", "x.png")).resize((40, 40)))
 
         self.text_label = tk.Label(
             self, text="Placing: ", font=("Helvetica", 25))
@@ -102,7 +104,7 @@ class MainFrame(tk.Tk):
             grid_pos.grid(row=row + 2, column=col, padx=2, pady=2)
             # on click event binding instead of a button command
             grid_pos.button.bind("<Button-1>", lambda event,
-                                 frame=grid_pos: on_button_click(event, frame))
+                                frame=grid_pos: on_button_click(event, frame))
 
         def on_button_click(event, frame) -> None:
             position = frame.number
