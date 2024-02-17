@@ -90,7 +90,8 @@ class ControlFrame(tk.Frame):
 
 
 class MainFrame(tk.Tk):
-    """A class that display all the information buttons and grids of the game"""
+    """A class that display all the information 
+    buttons and grids of the game"""
 
     def __init__(self) -> None:
         super().__init__()
@@ -121,6 +122,8 @@ class MainFrame(tk.Tk):
                                  frame=grid_pos: on_button_click(event, frame))
 
         def on_button_click(event, frame) -> None:
+            """places the correct element on the clicked 
+            button and check's if its a winning move"""
             position = frame.number
             element = "O" if self.turn % 2 == 0 else "X"
 
