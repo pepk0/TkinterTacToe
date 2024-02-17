@@ -3,7 +3,7 @@
 
 ## How to use:
   - ### Gameplay:  
-    The goal is to connect horizontally vertically or diagonally either X or O, a draw occurs when the game board is full and there is no empty place to put an element.  
+    The goal is to connect horizontally vertically or diagonally either "X" or "O", a draw occurs when the game board is full and there is no empty place to put an element.  
     ![game_play](https://i.imgur.com/HntJa5A.gif)
 
   - ### Reset game Button:
