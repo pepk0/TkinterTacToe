@@ -11,10 +11,12 @@ class ImageFrame(tk.Frame):
         super().__init__()
         self.image_one = ImageTk.PhotoImage(
             Image.open(os.path.join("imgs", "1x1.png")))
-        self.image_O = ImageTk.PhotoImage(Image.open(
-            os.path.join("imgs", "o.png")).resize((img_size, img_size)))
-        self.image_X = ImageTk.PhotoImage(Image.open(
-            os.path.join("imgs", "x.png")).resize((img_size, img_size)))
+        self.image_O = ImageTk.PhotoImage(
+            Image.open(os.path.join("imgs", "o.png")).resize(
+                (img_size, img_size)))
+        self.image_X = ImageTk.PhotoImage(
+            Image.open(os.path.join("imgs", "x.png")).resize(
+                (img_size, img_size)))
 
 
 class GridPosition(ImageFrame):
