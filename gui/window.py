@@ -104,7 +104,7 @@ class MainFrame(tk.Tk):
             grid_pos.grid(row=row + 2, column=col, padx=2, pady=2)
             # on click event binding instead of a button command
             grid_pos.button.bind("<Button-1>", lambda event,
-                                frame=grid_pos: on_button_click(event, frame))
+                                 frame=grid_pos: on_button_click(event, frame))
 
         def on_button_click(event, frame) -> None:
             position = frame.number
