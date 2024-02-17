@@ -7,6 +7,8 @@ from utils.functionality import (
 
 
 class ImageFrame(tk.Frame):
+    """"A class that contains all the images as attributes used in the game."""
+
     def __init__(self, img_size: int) -> None:
         super().__init__()
         self.image_one = ImageTk.PhotoImage(
@@ -20,6 +22,8 @@ class ImageFrame(tk.Frame):
 
 
 class GridPosition(ImageFrame):
+    """A class that represents a grid position on the tic tac toe field"""
+
     def __init__(self, number: int) -> None:
         super().__init__(img_size=80)
         self.number = number
@@ -37,6 +41,8 @@ class GridPosition(ImageFrame):
 
 
 class InfoFrame(ImageFrame):
+    """A class that gives game information"""
+
     def __init__(self) -> None:
         super().__init__(img_size=40)
         self.text_label = tk.Label(
@@ -47,6 +53,8 @@ class InfoFrame(ImageFrame):
         self.text_label.grid(row=0, column=0)
 
     def set_img(self, parent, element=None, draw=False):
+        """sets the appropriate image based on if the 
+        game is draw or on of O or X wins"""
         img = self.image_O if parent.turn % 2 == 0 else self.image_X
 
         if draw:
@@ -58,14 +66,18 @@ class InfoFrame(ImageFrame):
 
 
 class ControlFrame(tk.Frame):
+    """A class that store the buttons that control the game"""
+
     def __init__(self, parent) -> None:
         super().__init__()
         self.parent = parent
 
         def quit_game() -> None:
+            """quits the game"""
             raise SystemExit
 
         def reset_game(parent) -> None:
+            """will destroy the current window"""
             parent.destroy()
 
         self.quit_button = tk.Button(
@@ -78,6 +90,8 @@ class ControlFrame(tk.Frame):
 
 
 class MainFrame(tk.Tk):
+    """A class that display all the information buttons and grids of the game"""
+
     def __init__(self) -> None:
         super().__init__()
         self.title("Tic Tac Toe")
