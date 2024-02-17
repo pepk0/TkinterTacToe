@@ -132,6 +132,7 @@ class MainFrame(tk.Tk):
                 frame.on_place(self)
                 self.info_field.set_img(self)
 
+                # try to find a winner
                 winning_pos = get_winner(self.matrix_field, position, element)
 
                 if winning_pos:
