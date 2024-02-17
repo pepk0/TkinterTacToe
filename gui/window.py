@@ -6,15 +6,20 @@ from utils.functionality import (
     get_coordinates, place_on_matrix, get_winner, mark_winner, display_text)
 
 
-class GridPosition(tk.Frame):
-    def __init__(self, number: int) -> None:
+class ImageFrame(tk.Frame):
+    def __init__(self, img_size: int) -> None:
         super().__init__()
         self.image_one = ImageTk.PhotoImage(
             Image.open(os.path.join("imgs", "1x1.png")))
-        self.image_O = ImageTk.PhotoImage(
-            Image.open(os.path.join("imgs", "o.png")).resize((80, 80)))
-        self.image_X = ImageTk.PhotoImage(
-            Image.open(os.path.join("imgs", "x.png")).resize((80, 80)))
+        self.image_O = ImageTk.PhotoImage(Image.open(
+            os.path.join("imgs", "o.png")).resize((img_size, img_size)))
+        self.image_X = ImageTk.PhotoImage(Image.open(
+            os.path.join("imgs", "x.png")).resize((img_size, img_size)))
+
+
+class GridPosition(ImageFrame):
+    def __init__(self, number: int) -> None:
+        super().__init__(img_size=80)
         self.number = number
 
         self.button = tk.Button(self, image=self.image_one, height=110,
@@ -29,16 +34,9 @@ class GridPosition(tk.Frame):
         parent.turn += 1
 
 
-class InfoFrame(tk.Frame):
+class InfoFrame(ImageFrame):
     def __init__(self) -> None:
-        super().__init__()
-        self.image_draw = self.image_O = ImageTk.PhotoImage(
-            Image.open(os.path.join("imgs", "1x1.png")).resize((1, 1)))
-        self.image_O = ImageTk.PhotoImage(
-            Image.open(os.path.join("imgs", "o.png")).resize((40, 40)))
-        self.image_X = ImageTk.PhotoImage(
-            Image.open(os.path.join("imgs", "x.png")).resize((40, 40)))
-
+        super().__init__(img_size=40)
         self.text_label = tk.Label(
             self, text="Placing: ", font=("Helvetica", 25))
         self.img_label = tk.Label(self, image=self.image_O, height=90)
@@ -50,7 +48,7 @@ class InfoFrame(tk.Frame):
         img = self.image_O if parent.turn % 2 == 0 else self.image_X
 
         if draw:
-            img = self.image_draw
+            img = self.image_one
         elif element:
             img = self.image_O if element == "O" else self.image_X
 
