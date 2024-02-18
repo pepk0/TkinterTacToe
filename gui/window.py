@@ -35,6 +35,8 @@ class GridPosition(ImageFrame):
         self.button.grid(row=0, column=0)
 
     def on_place(self, parent) -> None:
+        """Places a either a X or O, image on the pressed 
+        frame box based on the turn"""
         img = self.image_O if parent.turn % 2 == 0 else self.image_X
         self.button["image"] = img
         parent.turn += 1
@@ -116,7 +118,7 @@ class MainFrame(tk.Tk):
             grid_pos = GridPosition(number)
             row, col = get_coordinates(number)
             self.button_mapping[(row, col)] = grid_pos
-            # dynamically calculation position 
+            # dynamically calculation position
             # based on the number of the grid position
             grid_pos.grid(row=row + 2, column=col, padx=2, pady=2)
             # on click event binding instead of a button command
