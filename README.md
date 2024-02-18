@@ -1,5 +1,5 @@
 # TkinterTacToe:
-> This is the classical game Tic Tac Toe implemented in the tkinter     package (“Tk interface”) Python interface to the Tcl/Tk GUI toolkit GUI library.
+> This is the classical game Tic Tac Toe implemented in the tkinter package (“Tk interface”) Python interface to the Tcl/Tk GUI toolkit GUI library.
 
 ## How to use:
   - ### Gameplay:  
