@@ -108,14 +108,16 @@ class MainFrame(tk.Tk):
         self.info_field = InfoFrame()
         self.control_field = ControlFrame(self)
 
-        # frame placement
         self.control_field.grid(row=0, column=0, columnspan=3, pady=20)
         self.info_field.grid(row=1, column=0, columnspan=3)
 
         for number in range(1, 10):
+            # places 9 GridPosition Frames in a 3x3 pattern
             row, col = get_coordinates(number)
             grid_pos = GridPosition(number)
             self.button_mapping[(row, col)] = grid_pos
+            # dynamically calculation position 
+            # based on the number of the grid position
             grid_pos.grid(row=row + 2, column=col, padx=2, pady=2)
             # on click event binding instead of a button command
             grid_pos.button.bind("<Button-1>", lambda event,
