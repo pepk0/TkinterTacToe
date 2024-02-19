@@ -12,7 +12,7 @@
   The game menu consists of two buttons:
 
   1. ### Reset game Button:
-      The reset game option is used to reset the game (closing the tkinter root, which is in a while True cycle and will start over again as if the game is resting.)  
+      The reset game option is used to reset the game (closing the main root, which is in a while True loop and will start over again as if the game is resting.)  
       ![reset_button](https://i.imgur.com/h883cni.gif)  
       **NOTE: To exit use Quit Game**
   
