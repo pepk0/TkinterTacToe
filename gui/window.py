@@ -122,29 +122,29 @@ class MainFrame(tk.Tk):
             grid_pos.grid(row=row + 2, column=col, padx=2, pady=2)
             # on click event binding instead of a button command
             grid_pos.button.bind("<Button-1>", lambda event,
-                                 frame=grid_pos: on_button_click(frame))
+                                 frame=grid_pos: self.on_button_click(frame))
 
-        def on_button_click(frame) -> None:
-            """places the correct element on the clicked 
-            button and check's if its a winning move"""
-            position = frame.number
-            element = "O" if self.turn % 2 == 0 else "X"
+    def on_button_click(self, frame) -> None:
+        """places the correct element on the clicked 
+        button and check's if its a winning move"""
+        position = frame.number
+        element = "O" if self.turn % 2 == 0 else "X"
 
-            if place_on_matrix(self.matrix_field, element, position):
-                # place an appropriate image on the button and info panel
-                frame.on_place(self)
-                self.info_field.set_img(self)
+        if place_on_matrix(self.matrix_field, element, position):
+            # place an appropriate image on the button and info panel
+            frame.on_place(self)
+            self.info_field.set_img(self)
 
-                # try to find a winner
-                winning_pos = get_winner(self.matrix_field, position, element)
+            # try to find a winner
+            winning_pos = get_winner(self.matrix_field, position, element)
 
-                if winning_pos:
-                    mark_winner(winning_pos, self.button_mapping)
-                    display_text(self, self.info_field,
-                                 "The winner is: ", element=element)
-                    self.matrix_field = [["X"] * 3 for _ in range(3)]
-                # a maximum of 9 moves can be made,
-                # if no one has won by then it's a draw
-                elif self.turn == 9:
-                    display_text(self, self.info_field,
-                                 "Game Over! DRAW!", draw=True)
+            if winning_pos:
+                mark_winner(winning_pos, self.button_mapping)
+                display_text(self, self.info_field,
+                                "The winner is: ", element=element)
+                self.matrix_field = [["X"] * 3 for _ in range(3)]
+            # a maximum of 9 moves can be made,
+            # if no one has won by then it's a draw
+            elif self.turn == 9:
+                display_text(self, self.info_field,
+                                "Game Over! DRAW!", draw=True)
