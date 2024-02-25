@@ -113,7 +113,7 @@ class MainFrame(tk.Tk):
         self.info_field.grid(row=1, column=0, columnspan=3)
 
         for number in range(1, 10):
-            # places 9 frames making a 3x3 tic tac toe pattern
+            # places 9 frames making a 3x3 tic-tac-toe pattern
             grid_pos = GridPosition(number)
             row, col = get_coordinates(number)
             self.button_mapping[(row, col)] = grid_pos
@@ -122,11 +122,12 @@ class MainFrame(tk.Tk):
             grid_pos.grid(row=row + 2, column=col, padx=2, pady=2)
             # on click event binding instead of a button command
             grid_pos.button.bind("<Button-1>", lambda event,
-                                 frame=grid_pos: self.on_button_click(frame))
+                                                      frame=grid_pos: self.on_button_click(
+                frame))
 
     def on_button_click(self, frame) -> None:
         """places the correct element on the clicked 
-        button and check's if its a winning move"""
+        button and check's if it's a winning move"""
         position = frame.number
         element = "O" if self.turn % 2 == 0 else "X"
 
