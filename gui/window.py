@@ -12,12 +12,12 @@ class ImageFrame(tk.Frame):
     def __init__(self, img_size: int) -> None:
         super().__init__()
         self.image_one = ImageTk.PhotoImage(
-            Image.open(os.path.join("imgs", "1x1.png")))
+            Image.open(os.path.join("images", "1x1.png")))
         self.image_O = ImageTk.PhotoImage(
-            Image.open(os.path.join("imgs", "o.png")).resize(
+            Image.open(os.path.join("images", "o.png")).resize(
                 (img_size, img_size)))
         self.image_X = ImageTk.PhotoImage(
-            Image.open(os.path.join("imgs", "x.png")).resize(
+            Image.open(os.path.join("images", "x.png")).resize(
                 (img_size, img_size)))
 
 
