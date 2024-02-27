@@ -22,10 +22,10 @@ class ImageFrame(tk.Frame):
 
 
 class GridPosition(ImageFrame):
-    """A class that represents a grid position on the tic tac toe field"""
+    """A class that represents a grid position on the tic-tac-toe field"""
 
-    def __init__(self, number: int) -> None:
-        super().__init__(img_size=80)
+    def __init__(self, number: int, img_size: int) -> None:
+        super().__init__(img_size)
         self.number = number
 
         self.button = tk.Button(self, image=self.image_one, height=110,
@@ -45,8 +45,8 @@ class GridPosition(ImageFrame):
 class InfoFrame(ImageFrame):
     """A class that gives game information"""
 
-    def __init__(self) -> None:
-        super().__init__(img_size=40)
+    def __init__(self, img_size: int) -> None:
+        super().__init__(img_size)
         self.text_label = tk.Label(
             self, text="Placing: ", font=("Helvetica", 25))
         self.img_label = tk.Label(self, image=self.image_O, height=90)
@@ -85,7 +85,8 @@ class ControlFrame(tk.Frame):
         """quits the game"""
         raise SystemExit
 
-    def reset_game(self, parent) -> None:
+    @staticmethod
+    def reset_game(parent) -> None:
         """will destroy the current window"""
         parent.destroy()
 
@@ -106,7 +107,7 @@ class MainFrame(tk.Tk):
         # starting position of the game frame, adjust for your screen
         self.geometry('+%d+%d' % (700, 200))
 
-        self.info_field = InfoFrame()
+        self.info_field = InfoFrame(40)
         self.control_field = ControlFrame(self)
 
         self.control_field.grid(row=0, column=0, columnspan=3, pady=20)
@@ -114,16 +115,16 @@ class MainFrame(tk.Tk):
 
         for number in range(1, 10):
             # places 9 frames making a 3x3 tic-tac-toe pattern
-            grid_pos = GridPosition(number)
+            grid_pos = GridPosition(number, 80)
             row, col = get_coordinates(number)
             self.button_mapping[(row, col)] = grid_pos
             # dynamically calculate position
             # based on the number of the grid position
             grid_pos.grid(row=row + 2, column=col, padx=2, pady=2)
             # on click event binding instead of a button command
-            grid_pos.button.bind("<Button-1>", lambda event,
-                                                      frame=grid_pos: self.on_button_click(
-                frame))
+            grid_pos.button.bind("<Button-1>",
+                                 lambda event, frame=grid_pos:
+                                 self.on_button_click(frame))
 
     def on_button_click(self, frame) -> None:
         """places the correct element on the clicked 
