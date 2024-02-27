@@ -76,11 +76,15 @@ class ControlFrame(tk.Frame):
             self, text="Quit Game", bg="#d15e6a", command=self.quit_game)
         self.restart_button = tk.Button(
             self, text="Reset Game", command=self.reset_game)
+        self.results_button = tk.Button(self, text="Results",
+                                        command=self.show_results)
+        self.results_button.grid(row=0, column=0)
+        self.restart_button.grid(row=0, column=1, padx=10)
+        self.quit_button.grid(row=0, column=2)
         self.parent = parent
-        self.restart_button.grid(row=0, column=0, padx=20)
-        self.quit_button.grid(row=0, column=1)
 
-    def quit_game(self) -> None:
+    @staticmethod
+    def quit_game() -> None:
         """quits the game"""
         clear_results()
         raise SystemExit
@@ -88,6 +92,14 @@ class ControlFrame(tk.Frame):
     def reset_game(self) -> None:
         """will destroy the current window"""
         self.parent.destroy()
+
+    def show_results(self) -> None:
+        top = tk.Toplevel(self.parent)
+        top.title("Results")
+        top.geometry('+%d+%d' % (400, 200))
+        top.resizable(False, False)
+        tk.Label(top, text=display_result(),
+                 font=("Consolas", 15)).grid(row=0, column=0)
 
 
 class MainFrame(tk.Tk):

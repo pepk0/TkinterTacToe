@@ -108,4 +108,4 @@ def display_result() -> str:
     table.field_names = ["Wins X", "Draws", "Wins O"]
     table.add_row([results["X"], results["Draw"], results["O"]])
 
-    return table.get_string()
+    return table.get_formatted_string(out_format="text")
