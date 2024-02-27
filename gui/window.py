@@ -3,7 +3,8 @@ import tkinter as tk
 import os
 from PIL import Image, ImageTk
 from utils.functionality import (
-    get_coordinates, place_on_matrix, get_winner, mark_winner, display_text)
+    get_coordinates, place_on_matrix, get_winner, mark_winner, display_text,
+    write_results, clear_results, display_result)
 
 
 class ImageFrame(tk.Frame):
@@ -81,11 +82,13 @@ class ControlFrame(tk.Frame):
 
     def quit_game(self) -> None:
         """quits the game"""
+        clear_results()
         raise SystemExit
 
     def reset_game(self) -> None:
         """will destroy the current window"""
         self.parent.destroy()
+
 
 
 class MainFrame(tk.Tk):
@@ -138,6 +141,7 @@ class MainFrame(tk.Tk):
             winning_pos = get_winner(self.matrix_field, position, element)
 
             if winning_pos:
+                write_results(element)
                 mark_winner(winning_pos, self.button_mapping)
                 display_text(self, self.info_field,
                              "The winner is: ", element=element)
@@ -145,5 +149,6 @@ class MainFrame(tk.Tk):
             # a maximum of 9 moves can be made
             # if no one has won by, then it's a draw
             elif self.turn == 9:
+                write_results("Draw")
                 display_text(self, self.info_field,
                              "Game Over! DRAW!", draw=True)
