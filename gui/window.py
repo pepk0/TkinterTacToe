@@ -90,7 +90,6 @@ class ControlFrame(tk.Frame):
         self.parent.destroy()
 
 
-
 class MainFrame(tk.Tk):
     """A class that displays all the information
     buttons and grids of the game"""
