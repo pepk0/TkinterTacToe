@@ -7,7 +7,7 @@ from utils.functionality import (
 
 
 class ImageFrame(tk.Frame):
-    """"A class that contains all the images as attributes used in the game."""
+    """A class that contains all the images as attributes used in the game."""
 
     def __init__(self, img_size: int) -> None:
         super().__init__()
@@ -35,7 +35,7 @@ class GridPosition(ImageFrame):
         self.button.grid(row=0, column=0)
 
     def on_place(self, parent) -> None:
-        """Places a either a X or O, image on the pressed 
+        """Places an either an X or O, image on the pressed
         frame box based on the turn"""
         img = self.image_O if parent.turn % 2 == 0 else self.image_X
         self.button["image"] = img
