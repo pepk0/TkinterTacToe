@@ -50,7 +50,6 @@ class InfoFrame(ImageFrame):
         self.text_label = tk.Label(
             self, text="Placing: ", font=("Helvetica", 25))
         self.img_label = tk.Label(self, image=self.image_O, height=90)
-
         self.img_label.grid(row=0, column=1)
         self.text_label.grid(row=0, column=0)
 
