@@ -77,7 +77,6 @@ class ControlFrame(tk.Frame):
         self.restart_button = tk.Button(
             self, text="Reset Game", command=lambda: self.reset_game(parent))
         self.parent = parent
-
         self.restart_button.grid(row=0, column=0, padx=20)
         self.quit_button.grid(row=0, column=1)
 
