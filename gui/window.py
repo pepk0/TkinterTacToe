@@ -35,7 +35,7 @@ class GridPosition(ImageFrame):
         self.button.grid(row=0, column=0)
 
     def on_place(self, parent) -> None:
-        """Places an either an X or O, image on the pressed
+        """Places either an X or O, image on the pressed
         frame box based on the turn"""
         img = self.image_O if parent.turn % 2 == 0 else self.image_X
         self.button["image"] = img
@@ -55,7 +55,7 @@ class InfoFrame(ImageFrame):
 
     def set_img(self, parent, element=None, draw=False):
         """sets the appropriate image based on if the 
-        game is draw or on of O or X wins"""
+        game is draw or one of O or X wins"""
         img = self.image_O if parent.turn % 2 == 0 else self.image_X
 
         if draw:
@@ -67,7 +67,7 @@ class InfoFrame(ImageFrame):
 
 
 class ControlFrame(tk.Frame):
-    """A class that store the buttons that control the game"""
+    """A class that stores the buttons that control the game"""
 
     def __init__(self, parent) -> None:
         super().__init__()
@@ -89,7 +89,7 @@ class ControlFrame(tk.Frame):
 
 
 class MainFrame(tk.Tk):
-    """A class that display all the information 
+    """A class that displays all the information
     buttons and grids of the game"""
 
     def __init__(self) -> None:
@@ -142,8 +142,8 @@ class MainFrame(tk.Tk):
                 display_text(self, self.info_field,
                              "The winner is: ", element=element)
                 self.matrix_field = [["X"] * 3 for _ in range(3)]
-            # a maximum of 9 moves can be made,
-            # if no one has won by then it's a draw
+            # a maximum of 9 moves can be made
+            # if no one has won by, then it's a draw
             elif self.turn == 9:
                 display_text(self, self.info_field,
                              "Game Over! DRAW!", draw=True)

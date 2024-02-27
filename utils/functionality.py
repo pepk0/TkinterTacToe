@@ -2,7 +2,7 @@ from math import ceil
 
 
 def get_coordinates(position: int) -> tuple:
-    """Given a position(int) returns the matrix 
+    """Given a position(int) returns the matrix
     coordinates(row, col) for this grid position"""
     return ceil(position / 3) - 1, (position + 2) % 3
 
@@ -51,8 +51,8 @@ def place_on_matrix(matrix: list, element: str, position: int) -> bool:
 
 
 def mark_winner(winning_sequence: list, mapping: dict) -> None:
-    """Given the winning sequence list[(int, int)..] and a 
-    mapping dict{(int, int): tk.Frame} takes each frame object and sets it's
+    """Given the winning sequence list[(int, int)…] and a
+    mapping dict{(int, int): tk.Frame} takes each frame object and sets its
     background color to green to mark winning positions"""
     for winner in winning_sequence:
         mapping[winner].button["bg"] = "Green"
