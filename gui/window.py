@@ -74,7 +74,7 @@ class ControlFrame(tk.Frame):
         self.quit_button = tk.Button(
             self, text="Quit Game", bg="#d15e6a", command=self.quit_game)
         self.restart_button = tk.Button(
-            self, text="Reset Game", command=lambda: self.reset_game(parent))
+            self, text="Reset Game", command=self.reset_game)
         self.parent = parent
         self.restart_button.grid(row=0, column=0, padx=20)
         self.quit_button.grid(row=0, column=1)
@@ -83,10 +83,9 @@ class ControlFrame(tk.Frame):
         """quits the game"""
         raise SystemExit
 
-    @staticmethod
-    def reset_game(parent) -> None:
+    def reset_game(self) -> None:
         """will destroy the current window"""
-        parent.destroy()
+        self.parent.destroy()
 
 
 class MainFrame(tk.Tk):
