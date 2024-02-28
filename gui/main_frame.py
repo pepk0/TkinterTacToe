@@ -25,7 +25,7 @@ class MainFrame(Tk):
 
         for number in range(1, 10):
             # places 9 frames making a 3x3 tic-tac-toe pattern
-            grid_pos = GridPosition(number, 80)
+            grid_pos = GridPosition(number, img_size=80)
             row, col = get_coordinates(number)
             self.game.mapping[(row, col)] = grid_pos
             # dynamically calculate position
