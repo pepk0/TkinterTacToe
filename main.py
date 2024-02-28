@@ -1,4 +1,4 @@
-from gui.window import MainFrame
+from gui.main_frame import MainFrame
 
 
 def main() -> None:
