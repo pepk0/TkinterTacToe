@@ -17,15 +17,15 @@ class MainFrame(Tk):
         self.game = TicTacToe()
         self.geometry('+%d+%d' % (700, 200))
 
-        self.info_field = InfoFrame(img_size=40)
-        self.control_field = ControlFrame(parent=self)
+        self.info_field = InfoFrame(40)
+        self.control_field = ControlFrame(self)
 
         self.control_field.grid(row=0, column=0, columnspan=3, pady=20)
         self.info_field.grid(row=1, column=0, columnspan=3)
 
         for number in range(1, 10):
             # places 9 frames making a 3x3 tic-tac-toe pattern
-            grid_pos = GridPosition(number, img_size=80)
+            grid_pos = GridPosition(number, 80)
             row, col = get_coordinates(number)
             self.game.mapping[(row, col)] = grid_pos
             # dynamically calculate position
