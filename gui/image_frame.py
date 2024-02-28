@@ -1,12 +1,13 @@
 from tkinter import Frame
 from PIL import Image, ImageTk
 import os
-from abc import ABC
+from abc import ABC, abstractmethod
 
 
-class ImageFrame(Frame, ABC):
+class ImageFrame(ABC, Frame):
     """A class that contains all the images as attributes used in the game."""
 
+    @abstractmethod
     def __init__(self, img_size: int) -> None:
         super().__init__()
         self.image_one = ImageTk.PhotoImage(

@@ -1,6 +1,5 @@
 from gui.image_frame import ImageFrame
 from tkinter import Button
-from main_frame import MainFrame
 
 
 class GridPosition(ImageFrame):
@@ -16,7 +15,7 @@ class GridPosition(ImageFrame):
 
         self.button.grid(row=0, column=0)
 
-    def on_place(self, parent: MainFrame) -> None:
+    def on_place(self, parent) -> None:
         """Places either an X or O, image on the pressed
         frame box based on the turn"""
         img = self.image_O if parent.game.turn % 2 == 0 else self.image_X
