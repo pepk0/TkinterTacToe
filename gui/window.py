@@ -118,8 +118,8 @@ class MainFrame(tk.Tk):
         # starting position of the game frame, adjust for your screen
         self.geometry('+%d+%d' % (700, 200))
 
-        self.info_field = InfoFrame(40)
-        self.control_field = ControlFrame(self)
+        self.info_field = InfoFrame(img_size=40)
+        self.control_field = ControlFrame(parent=self)
 
         self.control_field.grid(row=0, column=0, columnspan=3, pady=20)
         self.info_field.grid(row=1, column=0, columnspan=3)
