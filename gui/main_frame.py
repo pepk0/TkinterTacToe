@@ -36,7 +36,7 @@ class MainFrame(Tk):
                                  lambda event, frame=grid_pos:
                                  self.on_button_click(frame))
 
-    def on_button_click(self, frame) -> None:
+    def on_button_click(self, frame: GridPosition) -> None:
         """places the correct element on the clicked 
         button and check's if it's a winning move"""
         position = frame.number
@@ -46,7 +46,7 @@ class MainFrame(Tk):
             # place an appropriate image on the button and info panel
             frame.on_place(self)
             self.info_field.set_img(self)
-
+    
             # try to find a winner
             winning_pos = self.game.get_winner(position, element)
 
