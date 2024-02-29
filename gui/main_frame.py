@@ -7,8 +7,9 @@ from utils.functionality import get_coordinates, display_text, mark_winner
 
 
 class MainFrame(Tk):
-    """A class that displays all the information
-    buttons and grids of the game"""
+    """A class that represents the application and holds all the parts
+     such as frames with information frames with images and the frames
+     with the game grid """
 
     def __init__(self) -> None:
         super().__init__()

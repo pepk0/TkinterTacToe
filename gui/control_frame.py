@@ -3,7 +3,7 @@ from utils.functionality import display_result
 
 
 class ControlFrame(Frame):
-    """A class that stores the buttons that control the game"""
+    """A class that represents and holds the buttons that control the game"""
 
     def __init__(self, parent) -> None:
         super().__init__()
