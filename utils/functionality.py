@@ -17,34 +17,6 @@ def display_text(parent, widget, text: str, draw=False, element=None) -> None:
     widget.set_img(parent, draw=draw, element=element)
 
 
-def write_results(winner: str) -> None:
-    """Given a winner(string) takes set string and increments the
-    result json file for that winner"""
-    json_path = os.path.join("results", "results.json")
-
-    with open(json_path) as f:
-        curr_results = json.load(f)
-
-        curr_results[winner] += 1
-
-    with open(json_path, "w") as f:
-        json.dump(curr_results, f, indent=4)
-
-
-def clear_results() -> None:
-    """When called, this function will set all the results to 0"""
-    json_path = os.path.join("results", "results.json")
-
-    with open(json_path) as f:
-        curr_results = json.load(f)
-
-        for item in curr_results:
-            curr_results[item] = 0
-
-    with open(json_path, "w") as f:
-        json.dump(curr_results, f, indent=4)
-
-
 def display_result() -> str:
     """Formats the results in to a string table representation"""
     json_path = os.path.join("results", "results.json")
@@ -57,3 +29,12 @@ def display_result() -> str:
     table.add_row([results["X"], results["Draw"], results["O"]])
 
     return table.get_formatted_string(out_format="text")
+
+
+def mark_winner(winning_sequence: list, mapping: dict) -> None:
+    """Given the winning sequence list[(int, int)…] and a
+    mapping dict{(int, int): tk.Frame} takes each frame object and sets its
+    background color to green to mark winning positions"""
+    for winner in winning_sequence:
+        mapping[winner].button["bg"] = "Green"
+        mapping[winner].button["activebackground"] = "Green"

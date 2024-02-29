@@ -3,7 +3,8 @@ from tkinter import Label
 
 
 class InfoFrame(ImageFrame):
-    """A class that gives game information"""
+    """A class that displays game information
+    such as who won and who is placing on the board"""
 
     def __init__(self, img_size: int) -> None:
         super().__init__(img_size)

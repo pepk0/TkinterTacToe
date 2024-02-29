@@ -1,5 +1,5 @@
 from tkinter import Frame, Button, Toplevel, Label
-from utils.functionality import clear_results, display_result
+from utils.functionality import display_result
 
 
 class ControlFrame(Frame):
@@ -18,10 +18,9 @@ class ControlFrame(Frame):
         self.quit_button.grid(row=0, column=2)
         self.parent = parent
 
-    @staticmethod
-    def quit_game() -> None:
+    def quit_game(self) -> None:
         """quits the game"""
-        clear_results()
+        self.parent.game.clear_results()
         raise SystemExit
 
     def reset_game(self) -> None:

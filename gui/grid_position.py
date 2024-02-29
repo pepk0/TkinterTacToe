@@ -3,7 +3,8 @@ from tkinter import Button
 
 
 class GridPosition(ImageFrame):
-    """A class that represents a grid position on the tic-tac-toe field"""
+    """A class that represents a single grid position
+     on the tic-tac-toe field"""
 
     def __init__(self, number: int, img_size: int) -> None:
         super().__init__(img_size)

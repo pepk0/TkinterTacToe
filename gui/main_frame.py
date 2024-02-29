@@ -3,7 +3,7 @@ from game.game import TicTacToe
 from gui.control_frame import ControlFrame
 from gui.grid_position import GridPosition
 from gui.info_frame import InfoFrame
-from utils.functionality import get_coordinates, display_text, write_results
+from utils.functionality import get_coordinates, display_text, mark_winner
 
 
 class MainFrame(Tk):
@@ -51,14 +51,14 @@ class MainFrame(Tk):
             winning_pos = self.game.get_winner(position, element)
 
             if winning_pos:
-                write_results(element)
-                self.game.mark_winner(winning_pos)
+                self.game.write_results(element)
+                mark_winner(winning_pos, self.game.mapping)
                 display_text(self, self.info_field,
                              "The winner is: ", element=element)
                 self.game.finish_game()
             # a maximum of 9 moves can be made
             # if no one has won by, then it's a draw
             elif self.game.turn == 9:
-                write_results("Draw")
+                self.game.write_results("Draw")
                 display_text(self, self.info_field,
                              "Game Over! DRAW!", draw=True)

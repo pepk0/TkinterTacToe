@@ -1,8 +1,11 @@
+import os
+import json
 from utils.functionality import get_coordinates
 
 
 class TicTacToe:
-    """Imitates the Tic Tac Toe game"""
+    """A class imitating the Tic Tac Toe game and holing game specific
+    functions such as check for winners, place piece and more"""
 
     def __init__(self) -> None:
         self.game_filed: list = [[0] * 3 for _ in range(3)]
@@ -10,6 +13,8 @@ class TicTacToe:
         # col to Frame objects
         self.mapping: dict = {}
         self.turn: int = 0
+        # path to the file location of the json file
+        self.results_path: str = os.path.join("results", "results.json")
 
     def place(self, element: str, position: int) -> bool:
         """Given a matrix of size 3x3, element(str) and position (integer),
@@ -52,13 +57,29 @@ class TicTacToe:
 
         return None
 
-    def mark_winner(self, winning_sequence: list) -> None:
-        """Given the winning sequence list[(int, int)…] and a
-        mapping dict{(int, int): tk.Frame} takes each frame object and sets its
-        background color to green to mark winning positions"""
-        for winner in winning_sequence:
-            self.mapping[winner].button["bg"] = "Green"
-            self.mapping[winner].button["activebackground"] = "Green"
+    def write_results(self, winner: str) -> None:
+        """Given a winner(string) takes set string and increments the
+        result json file for that winner"""
+
+        with open(self.results_path) as json_file:
+            curr_results = json.load(json_file)
+
+            curr_results[winner] += 1
+
+        with open(self.results_path, "w") as json_file:
+            json.dump(curr_results, json_file, indent=4)
+
+    def clear_results(self) -> None:
+        """When called, this function will set all the results to 0"""
+
+        with open(self.results_path) as json_file:
+            curr_results = json.load(json_file)
+
+            for item in curr_results:
+                curr_results[item] = 0
+
+        with open(self.results_path, "w") as json_file:
+            json.dump(curr_results, json_file, indent=4)
 
     def finish_game(self) -> None:
         """when called this function fills up the game fild with elements
