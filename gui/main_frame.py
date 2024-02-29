@@ -25,7 +25,7 @@ class MainFrame(Tk):
 
         for number in range(1, 10):
             # places 9 frames making a 3x3 tic-tac-toe pattern
-            grid_pos = GridPosition(number, img_size=80)
+            grid_pos = GridPosition(number, 80)
             row, col = get_coordinates(number)
             self.game.mapping[(row, col)] = grid_pos
             # dynamically calculate position
@@ -36,7 +36,7 @@ class MainFrame(Tk):
                                  lambda event, frame=grid_pos:
                                  self.on_button_click(frame))
 
-    def on_button_click(self, frame: GridPosition) -> None:
+    def on_button_click(self, frame) -> None:
         """places the correct element on the clicked 
         button and check's if it's a winning move"""
         position = frame.number
