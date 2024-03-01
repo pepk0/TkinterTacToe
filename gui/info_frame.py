@@ -1,6 +1,8 @@
 from gui.image_frame import ImageFrame
 from tkinter import Label
 
+from utils.functionality import get_element
+
 
 class InfoFrame(ImageFrame):
     """A class that displays game information
@@ -17,11 +19,11 @@ class InfoFrame(ImageFrame):
     def set_img(self, parent, element=None, draw=False) -> None:
         """sets the appropriate image based on if the
         game is draw or one of O or X wins"""
-        img = self.image_O if parent.game.turn % 2 == 0 else self.image_X
+        img = get_element(parent.game.turn, self.image_O, self.image_X)
 
         if draw:
             img = self.image_one
         elif element:
-            img = self.image_O if element == "O" else self.image_X
+            img = get_element(parent.game.turn, self.image_X, self.image_O)
 
         self.img_label["image"] = img

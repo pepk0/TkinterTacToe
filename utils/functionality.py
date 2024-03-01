@@ -1,7 +1,4 @@
 from math import ceil
-import os
-import json
-from prettytable import PrettyTable
 
 
 def get_coordinates(position: int) -> tuple:
@@ -17,20 +14,6 @@ def display_text(parent, widget, text: str, draw=False, element=None) -> None:
     widget.set_img(parent, draw=draw, element=element)
 
 
-def display_result() -> str:
-    """Formats the results in to a string table representation"""
-    json_path = os.path.join("results", "results.json")
-    table = PrettyTable()
-
-    with open(json_path) as f:
-        results = json.load(f)
-
-    table.field_names = ["Wins X", "Draws", "Wins O"]
-    table.add_row([results["X"], results["Draw"], results["O"]])
-
-    return table.get_formatted_string(out_format="text")
-
-
 def mark_winner(winning_sequence: list, mapping: dict) -> None:
     """Given the winning sequence list[(int, int)…] and a
     mapping dict{(int, int): tk.Frame} takes each frame object and sets its
@@ -38,3 +21,9 @@ def mark_winner(winning_sequence: list, mapping: dict) -> None:
     for winner in winning_sequence:
         mapping[winner].button["bg"] = "Green"
         mapping[winner].button["activebackground"] = "Green"
+
+
+def get_element(turn: int, first_element, second_element):
+    """"Given two elements and a turn(int) gives back the first element
+    if the turn is even and the second element if the turn is odd"""
+    return first_element if turn % 2 == 0 else second_element

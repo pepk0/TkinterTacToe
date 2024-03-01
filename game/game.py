@@ -1,5 +1,6 @@
 import os
 import json
+from prettytable import PrettyTable
 from utils.functionality import get_coordinates
 
 
@@ -80,6 +81,19 @@ class TicTacToe:
 
         with open(self.results_path, "w") as json_file:
             json.dump(curr_results, json_file, indent=4)
+
+    def display_result(self) -> str:
+        """Formats the results in to a string table representation"""
+        json_path = self.results_path
+        table = PrettyTable()
+
+        with open(json_path) as f:
+            results = json.load(f)
+
+        table.field_names = ["Wins X", "Draws", "Wins O"]
+        table.add_row([results["X"], results["Draw"], results["O"]])
+
+        return table.get_formatted_string(out_format="text")
 
     def finish_game(self) -> None:
         """when called this function fills up the game fild with elements

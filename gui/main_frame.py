@@ -3,7 +3,8 @@ from game.game import TicTacToe
 from gui.control_frame import ControlFrame
 from gui.grid_position import GridPosition
 from gui.info_frame import InfoFrame
-from utils.functionality import get_coordinates, display_text, mark_winner
+from utils.functionality import (get_coordinates, display_text, mark_winner,
+                                 get_element)
 
 
 class MainFrame(Tk):
@@ -41,7 +42,7 @@ class MainFrame(Tk):
         """places the correct element on the clicked 
         button and check's if it's a winning move"""
         position = frame.number
-        element = "O" if self.game.turn % 2 == 0 else "X"
+        element = get_element(self.game.turn, "O", "X")
 
         if self.game.place(element, position):
             # place an appropriate image on the button and info panel

@@ -1,5 +1,4 @@
 from tkinter import Frame, Button, Toplevel, Label
-from utils.functionality import display_result
 
 
 class ControlFrame(Frame):
@@ -32,5 +31,5 @@ class ControlFrame(Frame):
         top.title("Results")
         top.geometry('+%d+%d' % (400, 200))
         top.resizable(False, False)
-        Label(top, text=display_result(),
+        Label(top, text=self.parent.game.display_result(),
               font=("Consolas", 15)).grid(row=0, column=0)
