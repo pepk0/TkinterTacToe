@@ -29,7 +29,7 @@ class ControlFrame(Frame):
     def show_results(self) -> None:
         top = Toplevel(self.parent)
         top.title("Results")
-        top.geometry('+%d+%d' % (400, 200))
+        top.geometry('+%d+%d' % (723, 380))
         top.resizable(False, False)
         Label(top, text=self.parent.game.display_result(),
               font=("Consolas", 15)).grid(row=0, column=0)
