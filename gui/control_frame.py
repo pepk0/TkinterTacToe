@@ -23,10 +23,11 @@ class ControlFrame(Frame):
         raise SystemExit
 
     def reset_game(self) -> None:
-        """will destroy the current window"""
+        """Destroys the current window and reopen a new one"""
         self.parent.destroy()
 
     def show_results(self) -> None:
+        """"Opens a new window displaying the results as a table"""
         top = Toplevel(self.parent)
         top.title("Results")
         top.geometry('+%d+%d' % (723, 380))
