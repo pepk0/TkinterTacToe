@@ -1,4 +1,3 @@
-import os
 from prettytable import PrettyTable
 from utils.functionality import get_coordinates
 
@@ -14,7 +13,6 @@ class TicTacToe:
         self.mapping: dict = {}
         self.turn: int = 0
         # path to the location of the json file holding the results
-        self.results_path: str = os.path.join("results", "results.json")
         self.score: dict = {}
 
     def place(self, element: str, position: int) -> bool:
