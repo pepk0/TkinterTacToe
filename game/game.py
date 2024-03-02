@@ -12,7 +12,6 @@ class TicTacToe:
         # col to Frame objects
         self.mapping: dict = {}
         self.turn: int = 0
-        # path to the location of the json file holding the results
         self.score: dict = {}
 
     def place(self, element: str, position: int) -> bool:
