@@ -79,12 +79,5 @@ class TicTacToe:
     def reset_game(self) -> None:
         """"When called resets the game and clears
         the game filed in the main frame"""
-        for position, grid_frame in self.mapping.items():
-            grid_frame.button["image"] = grid_frame.image_one
-            grid_frame.button["height"] = grid_frame.GRID_HEIGHT
-            grid_frame.button["width"] = grid_frame.GRID_WIDTH
-            grid_frame.button["background"] = "Gray"
-            grid_frame.button["activebackground"] = "Gray"
-
         self.turn = 0
         self.game_filed: list = [[0] * 3 for _ in range(3)]
