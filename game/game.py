@@ -26,7 +26,7 @@ class TicTacToe:
         return False
 
     def get_winner(self, position: int, element: str) -> list | None:
-        """ Given a matrix of size 3x3, position (int) and element (str)
+        """Given a matrix of size 3x3, position (int) and element (str)
         check if the current placed element, forms a wining chain"""
         row, col = get_coordinates(position)
         directions = [(0, 1), (1, 0), (1, 1), (-1, 1)]
@@ -72,7 +72,7 @@ class TicTacToe:
         return table.get_formatted_string(out_format="text")
 
     def finish_game(self) -> None:
-        """when called this function fills up the game fild with elements
+        """When called this function fills up the game fild with elements
         so we cant place after the game has finished"""
         self.game_filed = [["X"] * 3 for _ in range(3)]
 

@@ -17,7 +17,7 @@ class InfoFrame(ImageFrame):
         self.text_label.grid(row=0, column=0)
 
     def set_img(self, parent, element=None, draw=False) -> None:
-        """sets the appropriate image based on if the
+        """Sets the appropriate image based on if the
         game is draw or one of O or X wins"""
         img = get_element(parent.game.turn, self.image_O, self.image_X)
 

@@ -18,7 +18,7 @@ class ControlFrame(Frame):
         self.parent = parent
 
     def quit_game(self) -> None:
-        """quits the game"""
+        """Quits the game"""
         raise SystemExit
 
     def reset_game(self) -> None:
