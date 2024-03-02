@@ -3,6 +3,10 @@
 > This is the classical game Tic Tac Toe implemented in the tkinter package (“Tk
 > interface”) Python interface to the Tcl/Tk GUI toolkit GUI library.
 
+## Demonstration:
+
+![game_play](https://i.imgur.com/HntJa5A.gif)
+
 # How to play the game:
 
 The goal of the game is to connect horizontally,
@@ -10,9 +14,6 @@ vertically or diagonally 3 of either "X" or "O"
 if all cells are filled up and no one was able to connect 3 elements
 a draw occurs.
 
-## Demonstration:
-
-![game_play](https://i.imgur.com/HntJa5A.gif)
 
 ## Game Menu:
 
