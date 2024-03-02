@@ -2,11 +2,8 @@ from gui.main_frame import MainFrame
 
 
 def main() -> None:
-    # this loops makes the game run indefinitely
-    # until the quit game button is chosen
-    while True:
-        root = MainFrame()
-        root.mainloop()
+    root = MainFrame()
+    root.mainloop()
 
 
 if __name__ == "__main__":

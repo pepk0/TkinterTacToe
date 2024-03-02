@@ -1,5 +1,4 @@
 import os
-import json
 from prettytable import PrettyTable
 from utils.functionality import get_coordinates
 
@@ -16,6 +15,7 @@ class TicTacToe:
         self.turn: int = 0
         # path to the location of the json file holding the results
         self.results_path: str = os.path.join("results", "results.json")
+        self.score: dict = {}
 
     def place(self, element: str, position: int) -> bool:
         """Given a matrix of size 3x3, element(str) and position (integer),
@@ -60,38 +60,17 @@ class TicTacToe:
 
     def write_results(self, winner: str) -> None:
         """Given a winner(string) takes set string and increments the
-        result json file for that winner"""
+        result that winner"""
 
-        with open(self.results_path) as json_file:
-            curr_results = json.load(json_file)
-
-            curr_results[winner] += 1
-
-        with open(self.results_path, "w") as json_file:
-            json.dump(curr_results, json_file, indent=4)
-
-    def clear_results(self) -> None:
-        """When called, this function will set all the results to 0"""
-
-        with open(self.results_path) as json_file:
-            curr_results = json.load(json_file)
-
-            for item in curr_results:
-                curr_results[item] = 0
-
-        with open(self.results_path, "w") as json_file:
-            json.dump(curr_results, json_file, indent=4)
+        self.score[winner] = self.score.get(winner, 0) + 1
 
     def display_result(self) -> str:
         """Formats the results in to a string table representation"""
-        json_path = self.results_path
         table = PrettyTable()
 
-        with open(json_path) as f:
-            results = json.load(f)
-
         table.field_names = ["Wins X", "Draws", "Wins O"]
-        table.add_row([results["X"], results["Draw"], results["O"]])
+        table.add_row([self.score.get("X", 0), self.score.get("Draw", 0),
+                       self.score.get("O", 0)])
 
         return table.get_formatted_string(out_format="text")
 
@@ -99,3 +78,16 @@ class TicTacToe:
         """when called this function fills up the game fild with elements
         so we cant place after the game has finished"""
         self.game_filed = [["X"] * 3 for _ in range(3)]
+
+    def reset_game(self) -> None:
+        """"When called resets the game and clears
+        the game filed in the main frame"""
+        for position, grid_frame in self.mapping.items():
+            grid_frame.button["image"] = grid_frame.image_one
+            grid_frame.button["height"] = 110
+            grid_frame.button["width"] = 110
+            grid_frame.button["background"] = "Gray"
+            grid_frame.button["activebackground"] = "Gray"
+
+        self.turn = 0
+        self.game_filed: list = [[0] * 3 for _ in range(3)]

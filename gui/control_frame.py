@@ -19,12 +19,13 @@ class ControlFrame(Frame):
 
     def quit_game(self) -> None:
         """quits the game"""
-        self.parent.game.clear_results()
         raise SystemExit
 
     def reset_game(self) -> None:
-        """Destroys the current window and reopen a new one"""
-        self.parent.destroy()
+        """Resets the game making it possible to place play again"""
+        self.parent.game.reset_game()
+        self.parent.info_field.text_label["text"] = "Placing: "
+        self.parent.info_field.set_img(self.parent)
 
     def show_results(self) -> None:
         """"Opens a new window displaying the results as a table"""
