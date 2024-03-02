@@ -82,8 +82,8 @@ class TicTacToe:
         the game filed in the main frame"""
         for position, grid_frame in self.mapping.items():
             grid_frame.button["image"] = grid_frame.image_one
-            grid_frame.button["height"] = 110
-            grid_frame.button["width"] = 110
+            grid_frame.button["height"] = grid_frame.GRID_HEIGHT
+            grid_frame.button["width"] = grid_frame.GRID_WIDTH
             grid_frame.button["background"] = "Gray"
             grid_frame.button["activebackground"] = "Gray"
 
