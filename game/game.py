@@ -72,7 +72,7 @@ class TicTacToe:
         return table.get_formatted_string(out_format="text")
 
     def finish_game(self) -> None:
-        """When called this function fills up the game fild with elements
+        """When called this function fills up the game field with elements
         so we cant place after the game has finished"""
         self.game_filed = [["X"] * 3 for _ in range(3)]
 

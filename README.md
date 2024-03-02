@@ -5,7 +5,7 @@
 
 ## Demonstration:
 
-![game_play](https://i.imgur.com/HntJa5A.gif)
+[//]: # (![game_play]&#40;https://i.imgur.com/HntJa5A.gif&#41;)
 
 # How to play the game:
 
