@@ -23,7 +23,7 @@ class ControlFrame(Frame):
 
     def reset_game(self) -> None:
         """Resets the game making it possible to place play again"""
-        for _, grid_frame in self.parent.game.mapping.items():
+        for grid_frame in self.parent.game.mapping.values():
             grid_frame.button["image"] = grid_frame.image_one
             grid_frame.button["height"] = grid_frame.GRID_HEIGHT
             grid_frame.button["width"] = grid_frame.GRID_WIDTH
