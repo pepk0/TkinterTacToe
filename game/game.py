@@ -3,7 +3,7 @@ from utils.functionality import get_coordinates
 
 
 class TicTacToe:
-    """A class imitating the Tic Tac Toe game and holing game specific
+    """A class imitating the Tic Tac Toe game and holing game-specific
     functions such as check for winners, place piece and more"""
 
     def __init__(self) -> None:
