@@ -33,11 +33,10 @@ class TicTacToe:
         cur_row, cur_col = row, col
 
         while directions:
-
             next_row, next_col = directions.pop()
             winner = [(cur_row, cur_col)]
-            for i in range((3 * 2) - 2):
 
+            for i in range((3 * 2) - 2):
                 if i == 3 - 1:
                     cur_row, cur_col = row, col
                     next_row, next_col = next_row * -1, next_col * -1
@@ -47,28 +46,23 @@ class TicTacToe:
                 if 0 <= cur_row < 3 and 0 <= cur_col < 3:
                     if self.game_filed[cur_row][cur_col] == element:
                         winner.append((cur_row, cur_col))
-
                 if len(winner) >= 3:
                     return winner
 
             cur_row, cur_col = row, col
-
         return None
 
     def write_results(self, winner: str) -> None:
         """Given a winner(string) takes set string and increments the
         result that winner"""
-
         self.score[winner] = self.score.get(winner, 0) + 1
 
     def display_result(self) -> str:
         """Formats the results in to a string table representation"""
         table = PrettyTable()
-
         table.field_names = ["Wins X", "Draws", "Wins O"]
         table.add_row([self.score.get("X", 0), self.score.get("Draw", 0),
                        self.score.get("O", 0)])
-
         return table.get_formatted_string(out_format="text")
 
     def finish_game(self) -> None:
