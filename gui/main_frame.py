@@ -38,7 +38,7 @@ class MainFrame(Tk):
                                  lambda event, frame=grid_pos:
                                  self.on_button_click(frame))
 
-    def on_button_click(self, frame) -> None:
+    def on_button_click(self, frame: GridPosition) -> None:
         """places an element on the clicked frame, check' if it's a winning move
         if so, marks the winning positions, displays a message of the winner"""
         position = frame.number
