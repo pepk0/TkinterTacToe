@@ -39,8 +39,8 @@ class MainFrame(Tk):
                                  self.on_button_click(frame))
 
     def on_button_click(self, frame: GridPosition) -> None:
-        """places an element on the clicked frame, check' if it's a winning move
-        if so, marks the winning positions, displays a message of the winner"""
+        """places an element on the clicked frame,
+        and checks game status then displays an appropriate message"""
         position = frame.number
         element = get_element(self.game.turn, "O", "X")
 
