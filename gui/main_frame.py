@@ -40,7 +40,7 @@ class MainFrame(Tk):
 
     def on_button_click(self, frame: GridPosition) -> None:
         """places an element on the clicked frame,
-        and checks game status then displays an appropriate message"""
+        and checks game status then displays a message"""
         position = frame.number
         element = get_element(self.game.turn, "O", "X")
 
