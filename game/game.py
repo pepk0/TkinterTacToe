@@ -25,7 +25,7 @@ class TicTacToe:
 
         return False
 
-    def get_winner(self, position: int, element: str) -> list or None:
+    def get_winner(self, position: int, element: str) -> list | None:
         """Given a matrix of size 3x3, position (int) and element (str)
         check if the current placed element, forms a wining chain"""
         row, col = get_coordinates(position)
